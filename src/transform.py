@@ -14,7 +14,7 @@ def to_dataframe(raw: dict) -> pd.DataFrame:
     df = pd.DataFrame(
         {
             "timestamp": hourly["time"],
-            "temperature_c": hourly["temp_2m"],
+            "temperature_c": hourly["temperature_2m"],
             "humidity_pct": hourly["relative_humidity_2m"],
         }
     )
