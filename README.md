@@ -17,9 +17,9 @@ for the full build sequence and current progress.
 | Stage | Status |
 |---|---|
 | Extract (Open-Meteo → JSON) | ✅ Implemented |
-| Transform (JSON → DataFrame) | 🚧 In progress |
-| Load (DataFrame → SQLite) | ⬜ Not started |
-| Data-quality checks | ⬜ Not started |
+| Transform (JSON → DataFrame) | ✅ Implemented |
+| Load (DataFrame → SQLite) | ✅ Implemented |
+| Data-quality checks | 🚧 In progress |
 | CLI entry point | ⬜ Not started |
 
 ## Tech stack

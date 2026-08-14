@@ -3,7 +3,7 @@
 import pandas as pd
 import pytest
 
-from src.quality import check_no_nulls, check_not_empty, run_all_checks
+from src.quality import check_no_nulls, check_not_empty, check_ranges, run_all_checks
 
 
 def _good_df():
@@ -44,3 +44,24 @@ def test_run_all_checks_returns_passed_names():
 
     assert "not_empty" in passed
     assert "no_nulls" in passed
+    assert "ranges" in passed
+
+
+def test_check_ranges_passes_on_valid_values():
+    check_ranges(_good_df())  # should not raise
+
+
+def test_check_ranges_raises_on_temperature_out_of_bounds():
+    df = _good_df()
+    df.loc[0, "temperature_c"] = 65.0
+
+    with pytest.raises(ValueError):
+        check_ranges(df)
+
+
+def test_check_ranges_raises_on_humidity_above_100():
+    df = _good_df()
+    df.loc[0, "humidity_pct"] = 101
+
+    with pytest.raises(ValueError):
+        check_ranges(df)
