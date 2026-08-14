@@ -19,7 +19,7 @@ for the full build sequence and current progress.
 | Extract (Open-Meteo → JSON) | ✅ Implemented |
 | Transform (JSON → DataFrame) | ✅ Implemented |
 | Load (DataFrame → SQLite) | ✅ Implemented |
-| Data-quality checks | 🚧 In progress |
+| Data-quality checks | ✅ Implemented |
 | CLI entry point | ⬜ Not started |
 
 ## Tech stack

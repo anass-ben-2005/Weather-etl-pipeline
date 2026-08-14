@@ -31,7 +31,7 @@ def check_ranges(df: pd.DataFrame) -> None:
             "Data-quality check failed: temperature_c out of range (-90..60)"
         )
 
-    if (df["humidity_pct"] < 0).any() or (df["humidity_pct"] > 101).any():
+    if (df["humidity_pct"] < 0).any() or (df["humidity_pct"] > 100).any():
         raise ValueError(
             "Data-quality check failed: humidity_pct out of range (0..100)"
         )
