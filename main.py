@@ -13,7 +13,7 @@ def build_parser() -> argparse.ArgumentParser:
         description="Fetch, validate, and store weather data from Open-Meteo."
     )
     parser.add_argument("--lat", type=float, required=True, help="Latitude")
-    parser.add_arguemnt("--lon", type=float, required=True, help="Longitude")
+    parser.add_argument("--lon", type=float, required=True, help="Longitude")
     parser.add_argument(
         "--db", type=str, default="weather.db", help="Path to the SQLite database"
     )
