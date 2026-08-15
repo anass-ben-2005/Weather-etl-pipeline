@@ -10,9 +10,10 @@ Python only, no cloud accounts, no API keys.
 
 ## Project status
 
-🚧 **In development.** Extraction is implemented; transform, load, and
-data-quality modules are being built incrementally. See [plan.md](plan.md)
-for the full build sequence and current progress.
+✅ **Functional end-to-end.** The full pipeline — extract, transform,
+validate, load — runs via the `main.py` CLI. Remaining work is polish
+(integration tests, type hints, pinned dependencies). See
+[plan.md](plan.md) for the full build sequence and progress checklist.
 
 | Stage | Status |
 |---|---|
@@ -62,15 +63,39 @@ pip install -r requirements.txt
 
 ## Usage
 
-Not yet available — the CLI entry point (`main.py`) is still being built.
-Once complete, the pipeline will be run as:
+Run the pipeline end-to-end for any latitude/longitude:
 
 ```bash
-python main.py --lat 33.57 --lon -7.59 --db weather.db
+python main.py --lat 33.57 --lon -7.59
 ```
 
-This section will be updated with full usage instructions once the
-pipeline is functional end-to-end.
+This fetches the current hourly forecast from Open-Meteo, cleans it,
+runs data-quality checks, and writes the result into `weather.db` in
+the current directory. On success it prints a one-line summary:
+
+```
+Loaded 168 rows into weather.db
+```
+
+### CLI arguments
+
+| Flag | Required | Default | Description |
+|---|---|---|---|
+| `--lat` | ✅ | — | Latitude of the location to fetch |
+| `--lon` | ✅ | — | Longitude of the location to fetch |
+| `--db` | ❌ | `weather.db` | Path to the SQLite database file to write to |
+
+### Example: custom coordinates and database path
+
+```bash
+python main.py --lat 40.71 --lon -74.01 --db new_york.db
+```
+
+### Inspecting the results
+
+```bash
+sqlite3 weather.db "SELECT * FROM weather LIMIT 5;"
+```
 
 ## Testing
 
