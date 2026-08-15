@@ -20,7 +20,7 @@ for the full build sequence and current progress.
 | Transform (JSON → DataFrame) | ✅ Implemented |
 | Load (DataFrame → SQLite) | ✅ Implemented |
 | Data-quality checks | ✅ Implemented |
-| CLI entry point | ⬜ Not started |
+| CLI entry point | 🚧 In progress |
 
 ## Tech stack
 
