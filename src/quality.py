@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-REQUIRED_COLUMNS = ["timestamp", "temperature_c", "humidity_pct"]
+REQUIRED_COLUMNS: list[str] = ["timestamp", "temperature_c", "humidity_pct"]
 
 
 def check_not_empty(df: pd.DataFrame) -> None:
@@ -13,6 +13,7 @@ def check_not_empty(df: pd.DataFrame) -> None:
 
 def check_no_nulls(df: pd.DataFrame, cols: list[str]) -> None:
     """Raise ValueError if any of the given columns contain nulls."""
+    col: str
     for col in cols:
         if df[col].isnull().any():
             raise ValueError(
@@ -42,7 +43,7 @@ def run_all_checks(df: pd.DataFrame) -> list[str]:
 
     Returns the list of check names that passed.
     """
-    passed = []
+    passed: list[str] = []
 
     check_not_empty(df)
     passed.append("not_empty")

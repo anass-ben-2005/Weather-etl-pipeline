@@ -1,22 +1,23 @@
 """Extract raw weather data from the Open-Meteo API."""
 
 import time
+from typing import Any
 
 import requests
 
-BASE_URL = "https://api.open-meteo.com/v1/forecast"
-MAX_ATTEMPTS = 3
-BACKOFF_SECONDS = 2
-REQUEST_TIMEOUT = 10
+BASE_URL: str = "https://api.open-meteo.com/v1/forecast"
+MAX_ATTEMPTS: int = 3
+BACKOFF_SECONDS: int = 2
+REQUEST_TIMEOUT: int = 10
 
 
-def _get_with_retry(url: str, params: dict) -> dict:
+def _get_with_retry(url: str, params: dict[str, Any]) -> dict[str, Any]:
     """GET a URL with retries and linear backoff, returning parsed JSON.
 
     Raises RuntimeError if every attempt fails or the API returns a
     non-200 status.
     """
-    last_error = None
+    last_error: Exception | None = None
 
     for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
@@ -39,9 +40,9 @@ def _get_with_retry(url: str, params: dict) -> dict:
     )
 
 
-def fetch_weather(latitude: float, longitude: float) -> dict:
+def fetch_weather(latitude: float, longitude: float) -> dict[str, Any]:
     """Fetch hourly temperature and humidity data for a location."""
-    params = {
+    params: dict[str, Any] = {
         "latitude": latitude,
         "longitude": longitude,
         "hourly": "temperature_2m,relative_humidity_2m",
