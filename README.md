@@ -10,10 +10,10 @@ Python only, no cloud accounts, no API keys.
 
 ## Project status
 
-✅ **Functional end-to-end.** The full pipeline — extract, transform,
-validate, load — runs via the `main.py` CLI. Remaining work is polish
-(integration tests, type hints, pinned dependencies). See
-[plan.md](plan.md) for the full build sequence and progress checklist.
+✅ **Complete.** The full pipeline — extract, transform, validate, load —
+runs via the `main.py` CLI, is fully type-hinted, covered by unit and
+integration tests, linted, and CI-enforced on every push. See
+[plan.md](plan.md) for the full build history.
 
 | Stage | Status |
 |---|---|
@@ -105,6 +105,11 @@ ruff check .
 ```
 
 Both are also run automatically on every push via GitHub Actions.
+
+## Contributing
+
+This is a personal learning project and isn't actively seeking outside
+contributions, but issues and suggestions are welcome.
 
 ## License
 

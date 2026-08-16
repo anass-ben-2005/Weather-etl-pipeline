@@ -119,71 +119,71 @@ weather-etl-pipeline/
 
 Checklist format: `[ ]` step not started, mark done as I go.
 
-- [ ] **1.** `chore: project skeleton and README` — *(no CI yet)*
+- [x] **1.** `chore: project skeleton and README` — *(no CI yet)*
   dirs, empty `__init__.py` files, README stub, `.gitignore`
   (ignore `*.db`, `__pycache__`, `.venv`)
 
-- [ ] **2.** `feat: extract weather data from Open-Meteo` — *(no CI yet)*
+- [x] **2.** `feat: extract weather data from Open-Meteo` — *(no CI yet)*
   `extract.py` with `fetch_weather` + retry; `requirements.txt`
   (requests, pandas, pytest, ruff)
 
-- [ ] **3.** `chore: add GitHub Actions CI` — **expect FAIL**
+- [x] **3.** `chore: add GitHub Actions CI` — **expect FAIL**
   `ci.yml` runs `pytest` — no tests exist yet → red
 
-- [ ] **4.** `test: transform tests` — **expect FAIL**
+- [x] **4.** `test: transform tests` — **expect FAIL**
   `test_transform.py` written against `transform.py` that doesn't exist
   yet → import error
 
-- [ ] **5.** `feat: transform raw JSON to dataframe` — **expect FAIL**
+- [x] **5.** `feat: transform raw JSON to dataframe` — **expect FAIL**
   write `transform.py` with a deliberate bug: reference
   `hourly["temp_2m"]` (wrong key; real key is `temperature_2m`) → tests
   fail
 
-- [ ] **6.** `fix: correct temperature column key` — **expect PASS**
+- [x] **6.** `fix: correct temperature column key` — **expect PASS**
   fix the key → first green. **1st break→fix cycle.**
 
-- [ ] **7.** `feat: load dataframe into SQLite` — **expect PASS**
+- [x] **7.** `feat: load dataframe into SQLite` — **expect PASS**
   `load.py` + `load_to_sqlite`
 
-- [ ] **8.** `test: load tests` — **expect FAIL**
+- [x] **8.** `test: load tests` — **expect FAIL**
   `test_load.py` expects a table schema that `load.py` doesn't create
   correctly (schema mismatch)
 
-- [ ] **9.** `fix: explicit table schema on load` — **expect PASS**
+- [x] **9.** `fix: explicit table schema on load` — **expect PASS**
   2nd break→fix cycle
 
-- [ ] **10.** `feat: data-quality null checks` — **expect PASS**
+- [x] **10.** `feat: data-quality null checks` — **expect PASS**
   `quality.py` with `check_not_empty`, `check_no_nulls` + tests
 
-- [ ] **11.** `feat: data-quality range checks` — **expect FAIL**
+- [x] **11.** `feat: data-quality range checks` — **expect FAIL**
   add `check_ranges`, but off-by-one bound (e.g. humidity `> 100`
   allowed) makes a test fail
 
-- [ ] **12.** `fix: correct humidity upper bound` — **expect PASS**
+- [x] **12.** `fix: correct humidity upper bound` — **expect PASS**
   3rd break→fix cycle
 
-- [ ] **13.** `refactor: extract retry with backoff` — **expect PASS**
+- [x] **13.** `refactor: extract retry with backoff` — **expect PASS**
   tidy the retry logic, no behaviour change
 
-- [ ] **14.** `feat: CLI arguments in main` — **expect FAIL**
+- [x] **14.** `feat: CLI arguments in main` — **expect FAIL**
   `argparse` typo (`add_arguemnt`) → main crashes, a smoke test fails
 
-- [ ] **15.** `fix: argparse typo` — **expect PASS**
+- [x] **15.** `fix: argparse typo` — **expect PASS**
   4th break→fix cycle
 
-- [ ] **16.** `docs: usage instructions in README` — **expect PASS**
+- [x] **16.** `docs: usage instructions in README` — **expect PASS**
   README run instructions
 
-- [ ] **17.** `test: integration test end-to-end` — **expect FAIL**
+- [x] **17.** `test: integration test end-to-end` — **expect FAIL**
   integration test calls the real API → flaky/timeout in CI
 
-- [ ] **18.** `fix: mock the API in integration test` — **expect PASS**
+- [x] **18.** `fix: mock the API in integration test` — **expect PASS**
   mock `requests.get` → deterministic → 5th break→fix cycle
 
-- [ ] **19.** `refactor: add type hints across modules` — **expect PASS**
+- [x] **19.** `refactor: add type hints across modules` — **expect PASS**
   annotations only
 
-- [ ] **20.** `chore: pin dependency versions` — **expect PASS**
+- [x] **20.** `chore: pin dependency versions` — **expect PASS**
   pin versions in `requirements.txt`; clean ending
 
 Expected result: ~7 red commits, each followed by a green fix — five
@@ -269,8 +269,17 @@ turns the run red — that's intended on the "FAIL" commits.
 
 ## 8. Open items before commit #1
 
-- [ ] Confirm GitHub repo exists (or needs `git init` + remote add) —
-  repo is currently **not yet a git repository**.
-- [ ] Confirm repo will be public.
-- [ ] Confirm which lat/lon to use as the default in README/CLI examples
-  (spec default: `--lat 33.57 --lon -7.59`, Casablanca).
+- [x] Confirm GitHub repo exists (or needs `git init` + remote add) —
+  repo created at `github.com/anass-ben-2005/Weather-etl-pipeline`.
+- [ ] Confirm repo is set to **public** (required by spec §8 for
+  read-only telemetry collection) — check under repo Settings → General.
+- [x] Confirm which lat/lon to use as the default in README/CLI examples
+  — used `--lat 33.57 --lon -7.59` (Casablanca) throughout.
+
+## 9. Build complete
+
+All 20 commits from §4 have been made, in order, matching the intended
+red/green CI pattern (7 red commits, each followed by a green fix — 5
+break→fix cycles). `HEAD` is green: `pytest -q` and `ruff check .` both
+pass. Remaining: confirm the repo visibility item above, and verify the
+Actions tab shows the full red→green history end to end.
